@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026年独立储能收益分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 20px; background-color: #f5f7fa; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 900px; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .chart-container { position: relative; height: 380px; width: 100%; margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .card { padding: 12px; background: #f9fbff; border-radius: 8px; border-left: 4px solid #3498db; }
+        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .chart-container { height: 280px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align:center">2026年四省独立储能收益构成分析 (100MW/200MWh)</h2>
+        <div class="chart-container"><canvas id="revenueChart"></canvas></div>
+        <div class="grid">
+            <div class="card"><h4>甘肃: 转型期</h4><p>补偿800万。需靠精细套利对冲缺口。</p></div>
+            <div class="card" style="border-color:#e67e22"><h4>蒙西: 收益冠军</h4><p>5720万领跑。政策连续性最强。</p></div>
+            <div class="card" style="border-color:#9b59b6"><h4>山西: 调频溢价</h4><p>FM收益780万。辅助服务全国最高。</p></div>
+            <div class="card" style="border-color:#27ae60"><h4>山东: 极致套利</h4><p>租赁触底。必须高频交易维持利润。</p></div>
+        </div>
+    </div>
+    <script>
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['甘肃', '蒙西', '山西', '山东'],
+                datasets: [
+                    { label: '现货套利 (万元)', data: [2850, 3100, 2900, 3400], backgroundColor: '#3498db' },
+                    { label: '容量补偿/租赁 (万元)', data: [800, 2200, 1800, 1600], backgroundColor: '#e67e22' },
+                    { label: '辅助服务 (万元)', data: [550, 420, 780, 500], backgroundColor: '#9b59b6' }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } } }
+        });
+    </script>
+</body>
+</html>
